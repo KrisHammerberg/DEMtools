@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/plugins/demtools">
+        <file>shaDEM.png</file>
+        <file>SVF.png</file>
+        <file>solaraccess.png</file>
+    </qresource>
+</RCC>
