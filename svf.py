@@ -44,13 +44,13 @@ from demtoolsdialog import SVFdialog
 from shaDEM import shaDEM 
 
 #import time optimization
-import time
+#import time
 
 #profiling
-import cProfile
-import pstats
-import StringIO
-from line_profiler import LineProfiler
+#import cProfile
+#import pstats
+#import StringIO
+#from line_profiler import LineProfiler
 
 class svf:
 
@@ -74,15 +74,15 @@ class svf:
         #self.dlg.runButton.clicked.connect(self.tmpProfile)
         self.dlg.spinBox_maxHt.valueChanged.connect(self.checkInput)      
     
-    def tmpProfile(self):
-        runFunction = self.initLayer
-        cProfile.runctx('runFunction()', globals(), locals(),  'restats')
-        stream = StringIO.StringIO()
-        p = pstats.Stats('restats',  stream=stream)
-        p.strip_dirs().sort_stats('time').print_stats(15)
-        statString = stream.getvalue()
-        print stream.getvalue()
-        stream.close()
+#    def tmpProfile(self):
+#        runFunction = self.initLayer
+#        cProfile.runctx('runFunction()', globals(), locals(),  'restats')
+#        stream = StringIO.StringIO()
+#        p = pstats.Stats('restats',  stream=stream)
+#        p.strip_dirs().sort_stats('time').print_stats(15)
+#        statString = stream.getvalue()
+#        print stream.getvalue()
+#        stream.close()
     
     # run method that performs all the real work
     def start(self):

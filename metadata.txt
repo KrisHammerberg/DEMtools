@@ -9,11 +9,11 @@
 
 
 [general]
-name=DEM Tools
+name=DEMTools
 qgisMinimumVersion=2.0
-description=A suite of tools for doing neat things with DEMs
-	Important: requires Numpy, Numexpr, and Pysolar libraries!
-version=2.1
+description=A suite of tools for doing neat things with DEMs. 
+about=Important: requires Numpy, Numexpr, and Pysolar libraries!
+version=0.1
 author=Kris Hammerberg
 email=kris.hammerberg@gmail.com
 
@@ -27,12 +27,12 @@ email=kris.hammerberg@gmail.com
 # tags are comma separated with spaces allowed
 tags=DEM, shading, SVF, view factor
 
-homepage=
-tracker=
+homepage=https://github.com/KrisHammerberg/DEMtools/wiki
+tracker=https://github.com/KrisHammerberg/DEMtools/issues
 repository=https://github.com/KrisHammerberg/DEMtools
-icon=icon.png
+icon=shaDEM.png
 # experimental flag
-experimental=False
+experimental=True
 
 # deprecated flag (applies to the whole plugin, not just a single version
 deprecated=False
