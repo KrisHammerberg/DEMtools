@@ -27,6 +27,7 @@ from qgis.core import *
 import resources_rc
 # Import the code for the dialog
 import os.path
+import sys
 
 from shaDEM import shaDEM
 from svf import svf
@@ -63,10 +64,10 @@ class DemTools:
             import numpy
             import numexpr
             import Pysolar
-            import testIEs
+            
         except ImportError:
-            QMessageBox.critical( self.iface.mainWindow(),"ImportError", "Plugin requires Numpy, Numexpr, and Pysolar libraries. See http://www.numpy.org & https://code.google.com/p/numexpr/ & http://pysolar.org/" )
-            exit()
+            QMessageBox.critical( self.iface.mainWindow(),"ImportError", "Plugin requires Numpy, Numexpr, and Pysolar libraries.\n\See http://www.numpy.org & https://code.google.com/p/numexpr/ & http://pysolar.org/" )
+            sys.exitfunc()
         
 
     def initGui(self):
