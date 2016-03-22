@@ -67,7 +67,7 @@ class svf:
         self.dlg = SVFdialog()
         
         #interactive GUI connections:
-        self.dlg.comboBox.currentIndexChanged['QString'].connect(self.getParameters) #is it possible to call shaDEM class functions here? 
+        self.dlg.comboBox.layerChanged.connect(self.getParameters) #is it possible to call shaDEM class functions here? 
         self.dlg.spinBox_bands.valueChanged.connect(self.getParameters)
         self.dlg.runButton.clicked.connect(self.initLayer)
         #debug - activate cProdile
@@ -90,9 +90,9 @@ class svf:
         #have to access the ui through the dialog - i.e: self.dlg
         self.dlg.runButton.setEnabled(False)
         
-        self.dlg.comboBox.clear()
-        for item in self.shaDEM.listlayers(1): #Raster = 1, Vector = 0
-            self.dlg.comboBox.addItem(item)
+#         self.dlg.comboBox.clear()
+#         for item in self.shaDEM.listlayers(1): #Raster = 1, Vector = 0
+#             self.dlg.comboBox.addItem(item)
         
         #setup Raster Settings Menu
         self.getParameters()
@@ -101,7 +101,10 @@ class svf:
         self.dlg.show()
 
     def getParameters(self):
-        selectLayer = QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0] #self.getLayerByName(self.dlg.comboBox.currentText())
+        selectLayer = self.dlg.comboBox.currentLayer()#QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0] #self.getLayerByName(self.dlg.comboBox.currentText())
+        if selectLayer is None:
+            QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
+            sys.exitfunc()
         band = self.dlg.spinBox_bands.value()
         unitsPerPixel = selectLayer.rasterUnitsPerPixelX() #assumes square pixels
         bandCount = selectLayer.bandCount()
@@ -121,7 +124,7 @@ class svf:
 #Gets selected layer from GUI & preforms initial checks for validity
     def initLayer(self):
         ne.set_num_threads(mp.cpu_count()) # 1 thread per core
-        rlayer=QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0]#self.getLayerByName(self.dlg.comboBox.currentText())
+        rlayer=self.dlg.comboBox.currentLayer()#QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0]#self.getLayerByName(self.dlg.comboBox.currentText())
         sensorHt = self.dlg.spinBox_sensorHt.value()
         
         #get list of sun vectors

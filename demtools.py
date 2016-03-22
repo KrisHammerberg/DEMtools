@@ -63,11 +63,19 @@ class DemTools:
         try:
             import numpy
             import numexpr
-            import Pysolar
             
         except ImportError:
-            QMessageBox.critical( self.iface.mainWindow(),"ImportError", "Plugin requires Numpy, Numexpr, and Pysolar libraries.\n\See http://www.numpy.org & https://code.google.com/p/numexpr/ & http://pysolar.org/" )
+            QMessageBox.critical( self.iface.mainWindow(),"ImportError", "Plugin requires Numpy & Numexpr libraries.\n\See http://www.numpy.org & https://code.google.com/p/numexpr/" )
             sys.exitfunc()
+        
+        try:
+            import Pysolar as solar
+        except ImportError:
+            try:
+                import solar
+            except ImportError:
+                QMessageBox.critical( self.iface.mainWindow(),"ImportError", "Plugin requires Pysolar libraries.\n\See http://pysolar.org/" )
+                sys.exitfunc()
         
 
     def initGui(self):

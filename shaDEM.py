@@ -88,9 +88,9 @@ class shaDEM:
         
         self.dlg.runButton.setEnabled(False)
        
-        self.dlg.comboBox.clear()
-        for item in self.listlayers(1): #Raster = 1, Vector = 0
-            self.dlg.comboBox.addItem(item)
+#         self.dlg.comboBox.clear()
+#         for item in self.listlayers(1): #Raster = 1, Vector = 0
+#             self.dlg.comboBox.addItem(item)
         
         #setup Raster Settings Menu
         self.getParameters()
@@ -100,8 +100,11 @@ class shaDEM:
         self.dlg.show()
     
     def getParameters(self): #input parameter removed
-        selectLayer = QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0] 
+        selectLayer =self.dlg.comboBox.currentLayer() #QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0] 
         band = self.dlg.spinBox_bands.value()
+        if selectLayer is None:
+            QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
+            sys.exitfunc()
         unitsPerPixel = selectLayer.rasterUnitsPerPixelX()
         bandCount = selectLayer.bandCount()
         maxVal = selectLayer.dataProvider().bandStatistics(band).maximumValue
@@ -123,7 +126,7 @@ class shaDEM:
 
 #Gets selected layer from GUI & preforms initial checks for validity
     def initLayer(self):
-        self.orgLayer= QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0] 
+        self.orgLayer= self.dlg.comboBox.currentLayer()#QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0] 
         rlayer = self.orgLayer
         band = self.dlg.spinBox_bands.value()
         
@@ -315,7 +318,7 @@ class shaDEM:
 #Takes path of raster file and adds new layer
     def AddAsNewLayer(self,  path):
         #adds the new image as a layer, inverts and sets the contrast
-        orgLayerName = self.dlg.comboBox.currentText()
+        orgLayerName = self.dlg.comboBox.currentLayer().name()
         newLayerName = orgLayerName + " Shadow"
         self.iface.addRasterLayer(path, newLayerName)
         newLayer = QgsMapLayerRegistry.instance().mapLayersByName(newLayerName)[0]

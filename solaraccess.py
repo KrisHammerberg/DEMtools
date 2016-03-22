@@ -37,10 +37,18 @@ from demtoolsdialog import SolarAccessDialog
 import datetime as dt
 # Import ShaDEM for single vector calc
 from shaDEM import shaDEM 
-
+import sys
 #import sys
 #sys.path.append("/home/bpi/QGIS_DEV/pysolar")
-from Pysolar import solar
+try:
+    from Pysolar import solar
+except ImportError:
+    #Pysolar not installed try solar
+    try:
+        import solar
+    except ImportError:
+        print "You've got to have pysolar installed!"
+        sys.exit()
 
 
 class SolarAccess:
@@ -72,9 +80,9 @@ class SolarAccess:
         today = dt.date.today()
         self.dlg.dateEdit.setDate(QDate(today.year,  today.month, today.day))
         #self.dlg.lineEdit_maxHt.setInputMask('009.0;')
-        self.dlg.comboBox.clear()
-        for item in self.shaDEM.listlayers(1): #Raster = 1, Vector = 0
-            self.dlg.comboBox.addItem(item)
+#         self.dlg.comboBox.clear()
+#         for item in self.shaDEM.listlayers(1): #Raster = 1, Vector = 0
+#             self.dlg.comboBox.addItem(item)
         
         #setup Raster Settings Menu
         self.getParameters('set bands')
@@ -85,7 +93,10 @@ class SolarAccess:
     
     def getParameters(self, input):
        
-        selectLayer = QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0]
+        selectLayer = self.dlg.comboBox.currentLayer() #QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0]
+        if selectLayer is None:
+            QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
+            sys.exitfunc()
         band = self.dlg.spinBox_bands.value()
         unitsPerPixel = selectLayer.rasterUnitsPerPixelX()
         bandCount = selectLayer.bandCount()
@@ -108,7 +119,7 @@ class SolarAccess:
     
     def initLayer(self):
         
-        layer = QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0]
+        layer = self.dlg.comboBox.currentLayer()# QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0]
         startTime = self.dlg.start_time.time()  # (h, m, s, ms) 
         endTime = self.dlg.end_time.time()   
         date = self.dlg.dateEdit.date()
@@ -237,7 +248,7 @@ class SolarAccess:
 #Takes path of raster file and adds new layer
     def AddAsNewLayer(self,  path):
         #adds the new image as a layer, inverts and sets the contrast
-        orgLayerName = self.dlg.comboBox.currentText()
+        orgLayerName = self.dlg.comboBox.currentLayer().name()
         name = orgLayerName + " solar access"
         self.iface.addRasterLayer(path, name)
         rlayer= QgsMapLayerRegistry.instance().mapLayersByName(name)[0]

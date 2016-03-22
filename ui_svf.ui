@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>388</width>
+    <width>381</width>
     <height>394</height>
    </rect>
   </property>
@@ -35,6 +35,9 @@
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>8</number>
+    </property>
     <item>
      <widget class="QLabel" name="layer_prompt">
       <property name="text">
@@ -43,12 +46,12 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBox">
-      <property name="minimumSize">
-       <size>
-        <width>275</width>
-        <height>0</height>
-       </size>
+     <widget class="QgsMapLayerComboBox" name="comboBox">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
      </widget>
     </item>
@@ -258,6 +261,13 @@ p, li { white-space: pre-wrap; }
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsMapLayerComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsmaplayercombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
