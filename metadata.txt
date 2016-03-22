@@ -13,7 +13,7 @@ name=DEMTools
 qgisMinimumVersion=2.0
 description=A suite of tools for doing neat things with DEMs. 
 about=Important: requires Numpy, Numexpr, and Pysolar libraries!
-version=2.2
+version=2.3
 author=Kris Hammerberg
 email=kris.hammerberg@gmail.com
 
