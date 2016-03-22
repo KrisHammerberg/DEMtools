@@ -99,7 +99,7 @@ class DemTools:
         self.iface.addToolBarIcon(self.shaDEMact)
         self.iface.addPluginToRasterMenu(u"&DEM Tools", self.shaDEMact)
         
-        self.iface.addToolBarIcon(self.shaDEMact)
+        self.iface.addToolBarIcon(self.SVFact)
         self.iface.addPluginToRasterMenu(u"&DEM Tools", self.SVFact)        
         
         self.iface.addToolBarIcon(self.solaract)
