@@ -103,8 +103,9 @@ class svf:
     def getParameters(self):
         selectLayer = self.dlg.comboBox.currentLayer()#QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0] #self.getLayerByName(self.dlg.comboBox.currentText())
         if selectLayer is None:
-            QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
-            sys.exitfunc()
+#             QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
+#             self.dlg.close()#quit()#sys.exitfunc()
+            return -1
         band = self.dlg.spinBox_bands.value()
         unitsPerPixel = selectLayer.rasterUnitsPerPixelX() #assumes square pixels
         bandCount = selectLayer.bandCount()

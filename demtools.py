@@ -66,7 +66,7 @@ class DemTools:
             
         except ImportError:
             QMessageBox.critical( self.iface.mainWindow(),"ImportError", "Plugin requires Numpy & Numexpr libraries.\n\See http://www.numpy.org & https://code.google.com/p/numexpr/" )
-            sys.exitfunc()
+            
         
         try:
             import Pysolar as solar
@@ -75,7 +75,7 @@ class DemTools:
                 import solar
             except ImportError:
                 QMessageBox.critical( self.iface.mainWindow(),"ImportError", "Plugin requires Pysolar libraries.\n\See http://pysolar.org/" )
-                sys.exitfunc()
+                
         
 
     def initGui(self):

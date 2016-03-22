@@ -95,8 +95,9 @@ class SolarAccess:
        
         selectLayer = self.dlg.comboBox.currentLayer() #QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0]
         if selectLayer is None:
-            QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
-            sys.exitfunc()
+            return -1
+#             QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
+#             quit()#sys.exitfunc()
         band = self.dlg.spinBox_bands.value()
         unitsPerPixel = selectLayer.rasterUnitsPerPixelX()
         bandCount = selectLayer.bandCount()

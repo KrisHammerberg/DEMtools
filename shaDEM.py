@@ -103,8 +103,9 @@ class shaDEM:
         selectLayer =self.dlg.comboBox.currentLayer() #QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0] 
         band = self.dlg.spinBox_bands.value()
         if selectLayer is None:
-            QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
-            sys.exitfunc()
+#             QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
+#             self.dlg.close()#quit()#sys.exitfunc()
+            return -1
         unitsPerPixel = selectLayer.rasterUnitsPerPixelX()
         bandCount = selectLayer.bandCount()
         maxVal = selectLayer.dataProvider().bandStatistics(band).maximumValue
