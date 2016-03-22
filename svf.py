@@ -225,7 +225,7 @@ class svf:
         newPath = "_svf.".join(data["filePath"].rsplit(".", 1))
         
         if data["fileFormat"] == 'GTiff':
-            dst_ds = driver.Create( newPath, data["width"], data["height"], int(1), data["bandType"],  'TFW=YES' ) 
+            dst_ds = driver.Create( newPath, data["width"], data["height"], int(1), data["bandType"],  ['TFW=YES'] ) 
             dst_ds.SetGeoTransform(data["geotransform"])
             dst_ds.SetProjection(data["projection"])
         else:
