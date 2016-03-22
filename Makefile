@@ -37,7 +37,7 @@ PY_FILES = demtools.py demtoolsdialog.py __init__.py
 
 EXTRAS = icon.png metadata.txt
 
-UI_FILES = ui_demtools.py
+UI_FILES = ui_shadowvol.py ui_solaraccess.py ui_svf.py
 
 RESOURCE_FILES = resources_rc.py
 
