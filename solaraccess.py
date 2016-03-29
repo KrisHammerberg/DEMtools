@@ -94,7 +94,7 @@ class SolarAccess:
     def getParameters(self, input):
        
         selectLayer = self.dlg.comboBox.currentLayer() #QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0]
-        if selectLayer is None:
+        if selectLayer is None or selectLayer.type() != 1:
             return -1
 #             QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
 #             quit()#sys.exitfunc()

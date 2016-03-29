@@ -53,6 +53,9 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="filters">
+       <set>QgsMapLayerProxyModel::RasterLayer</set>
+      </property>
      </widget>
     </item>
    </layout>

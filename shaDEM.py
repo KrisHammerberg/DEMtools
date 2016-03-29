@@ -102,7 +102,7 @@ class shaDEM:
     def getParameters(self): #input parameter removed
         selectLayer =self.dlg.comboBox.currentLayer() #QgsMapLayerRegistry.instance().mapLayersByName(self.dlg.comboBox.currentText())[0] 
         band = self.dlg.spinBox_bands.value()
-        if selectLayer is None:
+        if selectLayer is None or selectLayer.type() != 1:
 #             QMessageBox.critical( self.iface.mainWindow(),"No Raster Layers", "Plugin requires raster layers to be loaded in the project" )
 #             self.dlg.close()#quit()#sys.exitfunc()
             return -1
