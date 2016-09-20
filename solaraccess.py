@@ -41,7 +41,7 @@ import sys
 #import sys
 #sys.path.append("/home/bpi/QGIS_DEV/pysolar")
 try:
-    from Pysolar import solar
+    from pysolar import solar
 except ImportError:
     #Pysolar not installed try solar
     try:
