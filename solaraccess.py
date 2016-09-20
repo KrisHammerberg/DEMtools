@@ -43,12 +43,15 @@ import sys
 try:
     from pysolar import solar
 except ImportError:
-    #Pysolar not installed try solar
+    #pysolar not installed try solar
     try:
-        import solar
-    except ImportError:
-        print "You've got to have pysolar installed!"
-        sys.exit()
+        from Pysolar import solar
+    except ImportError:     
+        try:
+            import solar
+        except ImportError:
+            print "You've got to have pysolar installed!"
+            sys.exit()
 
 
 class SolarAccess:
